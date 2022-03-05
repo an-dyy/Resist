@@ -12,4 +12,4 @@ Goals
 
 Notable contributors
 ====================
-- `Andy <https://github.com/an-dyy>`_ Creater & Maintainer.
+- `Andy <https://github.com/an-dyy>`_ Creator & Maintainer.
