@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "Rain"
+version = "0.1.0"
+description = "Strongly typed revolt API wrapper."
+authors = ["andy <andy.development@protonmail.com>"]
+license = "MIT"
+
+readme = "README.rst"
+keywords = ["revolt"]
+homepage = "https://github.com/an-dyy/Rain"
+packages = [{include="rain"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+isort = "^5.10.1"
+pre-commit = "^2.17.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+flake8 = "^4.0.1"
+pytest = "^6.2.5"
+pytest-asyncio = "^0.17.0"
+pytest-cov = "^3.0.0"
+
+[tool.black]
+line-length = 90
+
+[tool.isort]
+profile = "black"
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportPrivateUsage = false
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
