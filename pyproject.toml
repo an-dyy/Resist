@@ -12,8 +12,8 @@ packages = [{include="rain"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-isort = "^5.10.1"
-pre-commit = "^2.17.0"
+httpx = "^0.22.0"
+tornado = "^6.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
@@ -21,6 +21,8 @@ flake8 = "^4.0.1"
 pytest = "^6.2.5"
 pytest-asyncio = "^0.17.0"
 pytest-cov = "^3.0.0"
+pre-commit = "^2.17.0"
+isort = "^5.10.1"
 
 [tool.black]
 line-length = 90
