@@ -1,5 +1,5 @@
-Rain Wrapper
-============
+RESIST
+======
 An API wrapper for `revolt`
 
 

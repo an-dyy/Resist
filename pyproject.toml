@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Rain"
+name = "Resist"
 version = "0.1.0"
 description = "Strongly typed revolt API wrapper."
 authors = ["andy <andy.development@protonmail.com>"]
@@ -7,8 +7,8 @@ license = "MIT"
 
 readme = "README.rst"
 keywords = ["revolt"]
-homepage = "https://github.com/an-dyy/Rain"
-packages = [{include="rain"}]
+homepage = "https://github.com/an-dyy/Resist"
+packages = [{include="resist"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
