@@ -4,6 +4,7 @@ __version__ = '0.1.0-alpha'
 
 from typing import NamedTuple, Literal
 
+
 class Version(NamedTuple):
     major: int
     minor: int
