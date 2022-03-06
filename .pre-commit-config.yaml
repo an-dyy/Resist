@@ -20,11 +20,3 @@ repos:
     rev: 4.0.1
     hooks:
     -   id: flake8
-
-  - repo: local
-    hooks:
-      - id: coverage
-        name: code-coverage
-        language: system
-        entry: pytest --cov=./ --cov-report=xml --cov-fail-under=80
-        types: [python]

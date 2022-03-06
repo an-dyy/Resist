@@ -1,8 +1,12 @@
 __author__ = "Andy"
 __license__ = "MIT"
-__version__ = '0.1.0-alpha'
+__version__ = "0.1.0-alpha"
 
-from typing import NamedTuple, Literal
+from typing import Literal, NamedTuple
+
+from .client import *
+from .rest import *
+from .websocket import *
 
 
 class Version(NamedTuple):

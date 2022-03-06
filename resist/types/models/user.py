@@ -1,0 +1,47 @@
+from __future__ import annotations
+
+from typing import Literal, TypedDict
+
+from typing_extensions import NotRequired
+
+from .channel import IconData
+
+__all__ = ("RelationData", "StatusData", "BotData", "UserData")
+
+
+class RelationData(TypedDict):
+    _id: str
+
+    status: Literal[
+        "Blocked", "BlockedOther", "Friend", "Incoming", "None", "Outgoing", "User"
+    ]
+
+
+class StatusData(TypedDict):
+    text: NotRequired[str]
+    presence: NotRequired[Literal["Busy", "Idle", "Invisible", "Online"]]
+
+
+class BotData(TypedDict):
+    owner: str
+
+
+class UserData(TypedDict):
+    _id: str
+    username: str
+
+    avatar: NotRequired[IconData]
+    relations: NotRequired[RelationData]
+
+    badges: NotRequired[int]
+    status: NotRequired[StatusData]
+
+    relationship: NotRequired[
+        Literal[
+            "Blocked", "BlockedOther", "Friend", "Incoming", "None", "Outgoing", "User"
+        ]
+    ]
+
+    online: NotRequired[bool]
+    flags: NotRequired[int]
+    bot: NotRequired[BotData]

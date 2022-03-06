@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Testing
-./test.py
+test.py
 
 # C extensions
 *.so
