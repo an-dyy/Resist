@@ -36,6 +36,7 @@ typeCheckingMode = "strict"
 reportImportCycles = false
 reportUnnecessaryIsInstance = false
 reportPrivateUsage = false
+ignore = ["tests/"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

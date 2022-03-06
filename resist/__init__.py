@@ -5,6 +5,7 @@ __version__ = "0.1.0-alpha"
 from typing import Literal, NamedTuple
 
 from .client import *
+from .models import *
 from .rest import *
 from .websocket import *
 

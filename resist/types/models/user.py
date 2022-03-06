@@ -31,7 +31,7 @@ class UserData(TypedDict):
     username: str
 
     avatar: NotRequired[IconData]
-    relations: NotRequired[RelationData]
+    relations: NotRequired[list[RelationData]]
 
     badges: NotRequired[int]
     status: NotRequired[StatusData]

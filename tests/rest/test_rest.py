@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from typing import cast
 from unittest import mock
 
 import aiohttp
@@ -38,3 +39,18 @@ class TestRESTClient:
 
                 assert isinstance(rest, resist.RESTClient)
                 self.test_attributes(rest)
+
+    @pytest.mark.asyncio
+    async def test_request(self, client: resist.WebSocketClient) -> None:
+        rest = mock.AsyncMock()
+        session = mock.AsyncMock()
+        request = mock.AsyncMock()
+
+        request.__aenter__ = mock.AsyncMock()
+        request.__aexit__ = mock.AsyncMock()
+
+        session.request = request
+        rest.session = session
+        client.rest = cast(resist.RESTClient, rest)
+
+        await client.rest.request("GET", "foo")  # No idea how to test this tbh.

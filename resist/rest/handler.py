@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import aiohttp
 import attr
@@ -80,3 +80,27 @@ class RESTClient:
             self.context = APIContext(**(await resp.json()))
 
         return self
+
+    async def request(self, method: str, path: str, **kwargs: Any) -> Any:
+        """Makes a request to the API.
+
+        Parameters
+        ----------
+        method: :class:`str`
+            The method of the request.
+
+        path: :class:`str`
+            The path of the request.
+
+        kwargs: Any
+            kwargs to pass to `aiohttp.ClientSession.request`
+
+        Returns
+        -------
+        Any
+            The response of the request.
+        """
+        path = self.url + path
+
+        async with self.session.request(method, path, **kwargs) as resp:
+            return await resp.json()
