@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, TypedDict
+from typing import Literal, TypedDict, Union
 
 from typing_extensions import NotRequired
 
@@ -76,7 +76,7 @@ class ImageEmbedData(EmbedImageData):
     type: Literal["Image"]
 
 
-class TextEmbedData(EmbedImageData):
+class TextEmbedData(TypedDict):
     type: Literal["Text"]
     icon_url: NotRequired[str]
     url: NotRequired[str]
@@ -84,6 +84,9 @@ class TextEmbedData(EmbedImageData):
     description: NotRequired[str]
     media: NotRequired[AttachmentData]
     colour: NotRequired[str]
+
+
+NoneEmbed = TypedDict("NoneEmbed", {"type": Literal["None"]})
 
 
 class SystemMessageContent(TypedDict):
@@ -120,6 +123,9 @@ class MasqueradeData(TypedDict):
     avatar: NotRequired[str]
 
 
+EmbedType = Union[WebsiteEmbedData, ImageEmbedData, TextEmbedData, NoneEmbed]
+
+
 class MessageData(TypedDict):
     _id: str
     nonce: NotRequired[str]
@@ -133,7 +139,7 @@ class MessageData(TypedDict):
     )
     attachments: NotRequired[list[AttachmentData]]
     edited: NotRequired[MessageEditedData]
-    embeds: NotRequired[WebsiteEmbedData | ImageEmbedData | TextEmbedData]
+    embeds: NotRequired[EmbedType]
     mentions: NotRequired[list[str]]
     replies: NotRequired[list[str]]
     masquerade: NotRequired[MasqueradeData]
