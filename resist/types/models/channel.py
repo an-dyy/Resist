@@ -4,7 +4,7 @@ from typing import Literal, TypedDict
 
 from typing_extensions import NotRequired
 
-from .attachments import AttachmentData
+from .asset import AssetData
 
 
 __all__ = (
@@ -39,7 +39,7 @@ class GroupData(TypedDict):
 
     description: NotRequired[str]
     last_message_id: NotRequired[str]
-    icon: NotRequired[AttachmentData]
+    icon: NotRequired[AssetData]
 
     permissions: NotRequired[int]
     nsfw: NotRequired[bool]
@@ -51,7 +51,7 @@ class TextChannelData(TypedDict):
     name: str
 
     description: NotRequired[str]
-    icon: NotRequired[AttachmentData]
+    icon: NotRequired[AssetData]
 
     default_permissions: NotRequired[int]
     role_permissions: NotRequired[int]
@@ -67,7 +67,7 @@ class VoiceChannelData(TypedDict):
     name: str
 
     description: NotRequired[str]
-    icon: NotRequired[AttachmentData]
+    icon: NotRequired[AssetData]
 
     default_permissions: NotRequired[int]
     role_permissions: NotRequired[int]

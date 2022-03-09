@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal, TypedDict
 
 
-__all__ = ("MetaData", "MediaMetaData", "AttachmentData")
+__all__ = ("MetaData", "MediaMetaData", "AssetData")
 
 
 class MetaData(TypedDict):
@@ -16,7 +16,7 @@ class MediaMetaData(TypedDict):
     height: int
 
 
-class AttachmentData(TypedDict):
+class AssetData(TypedDict):
     _id: str
     tag: Literal["attachments", "avatars", "backgrounds", "banners", "icons"]
     size: int

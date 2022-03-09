@@ -4,7 +4,7 @@ from typing import Literal, TypedDict
 
 from typing_extensions import NotRequired
 
-from .attachments import AttachmentData
+from .asset import AssetData
 
 __all__ = ("RelationData", "StatusData", "BotData", "UserData")
 
@@ -30,7 +30,7 @@ class UserData(TypedDict):
     _id: str
     username: str
 
-    avatar: NotRequired[AttachmentData]
+    avatar: NotRequired[AssetData]
     relations: NotRequired[list[RelationData]]
 
     badges: NotRequired[int]

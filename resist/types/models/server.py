@@ -4,7 +4,7 @@ from typing import TypedDict
 
 from typing_extensions import NotRequired
 
-from .attachments import AttachmentData
+from .asset import AssetData
 
 __all__ = ("CategoryData", "SystemMessagesData", "RoleData", "ServerData")
 
@@ -44,8 +44,8 @@ class ServerData(TypedDict):
     roles: NotRequired[list[RoleData]]
     default_permissions: list[tuple[int, int]]
 
-    icon: NotRequired[AttachmentData]
-    banner: NotRequired[AttachmentData]
+    icon: NotRequired[AssetData]
+    banner: NotRequired[AssetData]
     nsfw: NotRequired[bool]
     flags: NotRequired[int]
     analytics: NotRequired[bool]

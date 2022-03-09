@@ -4,7 +4,7 @@ from typing import Literal, TypedDict, Union
 
 from typing_extensions import NotRequired
 
-from .attachments import AttachmentData
+from .asset import AssetData
 
 
 class YoutubeLinkEmbedMetadata(TypedDict):
@@ -82,7 +82,7 @@ class TextEmbedData(TypedDict):
     url: NotRequired[str]
     title: NotRequired[str]
     description: NotRequired[str]
-    media: NotRequired[AttachmentData]
+    media: NotRequired[AssetData]
     colour: NotRequired[str]
 
 
@@ -137,7 +137,7 @@ class MessageData(TypedDict):
         | ChannelActionSystemMessageContent
         | str
     )
-    attachments: NotRequired[list[AttachmentData]]
+    attachments: NotRequired[list[AssetData]]
     edited: NotRequired[MessageEditedData]
     embeds: NotRequired[EmbedType]
     mentions: NotRequired[list[str]]

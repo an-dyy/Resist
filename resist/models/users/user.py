@@ -6,7 +6,7 @@ import attr
 from typing_extensions import Self
 
 from ...types import UserData
-from ..assets import Avatar
+from ..assets import Asset
 from ..cacheable import Cacheable
 from ..fetchable import Fetchable
 from .flags import UserBadges, UserFlags
@@ -37,7 +37,7 @@ class User(Cacheable, Fetchable):
     username: :class:`str`
         The username of the user.
 
-    avatar: None | :class:`.Avatar`
+    avatar: None | :class:`.Asset`
         The avatar of the user.
 
     relations: :class:`list`
@@ -70,7 +70,7 @@ class User(Cacheable, Fetchable):
 
     unique: str = attr.field(init=False, repr=True)
     username: str = attr.field(init=False, repr=True)
-    avatar: None | Avatar = attr.field(init=False, repr=False)
+    avatar: None | Asset = attr.field(init=False, repr=False)
 
     relations: list[Relationship] = attr.field(init=False, repr=False)
     badges: UserBadges = attr.field(init=False, repr=True)
@@ -91,7 +91,7 @@ class User(Cacheable, Fetchable):
 
         self.avatar = None
         if avatar_data := self.data.get("avatar"):
-            self.avatar = Avatar(avatar_data)
+            self.avatar = Asset(avatar_data)
 
         self.relations = []
         if relations_data := self.data.get("relations"):

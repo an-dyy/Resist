@@ -1,4 +1,4 @@
-from .attachments import *
+from .asset import *
 from .channel import *
 from .message import *
 from .server import *
