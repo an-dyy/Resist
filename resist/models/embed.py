@@ -38,12 +38,12 @@ class Embed:
         The embed's raw data.
     """
 
-    title: str | None = field(init=True, repr=True, default=None)
-    url: str | None = field(init=True, repr=True, default=None)
-    description: str | None = field(init=True, repr=True, default=None)
-    icon_url: str | None = field(init=True, repr=True, default=None)
-    media: Asset | None = field(init=True, repr=True, default=None)
-    colour: str | None = field(init=True, repr=True, default=None)
+    title: str | None = field(init=True, repr=True, default=None, kw_only=True)
+    url: str | None = field(init=True, repr=True, default=None, kw_only=True)
+    description: str | None = field(init=True, repr=True, default=None, kw_only=True)
+    icon_url: str | None = field(init=True, repr=True, default=None, kw_only=True)
+    media: Asset | None = field(init=True, repr=True, default=None, kw_only=True)
+    colour: str | None = field(init=True, repr=True, default=None, kw_only=True)
     data: EmbedData = field(init=True, repr=False, default=None, kw_only=True)
 
     def __attrs_post_init__(self) -> None:
