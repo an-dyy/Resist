@@ -139,7 +139,7 @@ class MessageData(TypedDict):
     )
     attachments: NotRequired[list[AssetData]]
     edited: NotRequired[MessageEditedData]
-    embeds: NotRequired[EmbedType]
+    embeds: NotRequired[list[EmbedType]]
     mentions: NotRequired[list[str]]
     replies: NotRequired[list[str]]
     masquerade: NotRequired[MasqueradeData]
