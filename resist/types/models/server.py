@@ -4,7 +4,7 @@ from typing import TypedDict
 
 from typing_extensions import NotRequired
 
-from .channel import IconData
+from .attachments import AttachmentData
 
 __all__ = ("CategoryData", "SystemMessagesData", "RoleData", "ServerData")
 
@@ -19,7 +19,7 @@ class SystemMessagesData(TypedDict):
     user_joined: NotRequired[str]
     user_left: NotRequired[str]
 
-    user_Kicked: NotRequired[str]
+    user_kicked: NotRequired[str]
     user_banned: NotRequired[str]
 
 
@@ -44,8 +44,8 @@ class ServerData(TypedDict):
     roles: NotRequired[list[RoleData]]
     default_permissions: list[tuple[int, int]]
 
-    icon: NotRequired[IconData]
-    banner: NotRequired[IconData]
+    icon: NotRequired[AttachmentData]
+    banner: NotRequired[AttachmentData]
     nsfw: NotRequired[bool]
     flags: NotRequired[int]
     analytics: NotRequired[bool]
