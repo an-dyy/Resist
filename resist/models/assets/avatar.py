@@ -4,7 +4,7 @@ from typing import Literal
 
 import attr
 
-from ...types import IconData, MediaMetaData, MetaData
+from ...types import AttachmentData, MediaMetaData, MetaData
 
 __all__ = ("Avatar",)
 
@@ -34,7 +34,7 @@ class Avatar:
         The tag of the avatar.
     """
 
-    data: IconData = attr.field(repr=False)
+    data: AttachmentData = attr.field(repr=False)
 
     unique: str = attr.field(init=False, repr=True)
     size: int = attr.field(init=False, repr=True)
