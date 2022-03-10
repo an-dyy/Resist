@@ -66,8 +66,13 @@ class Message(Cacheable, Fetchable):
     replies: :class:`list[.Message]`
         The list of messages being replied to.
 
-    relationship: None | :class:`dict`
+    masquerade: None | :class:`dict`
         Alternate username/avatar used while sending this message.
+
+    system: None | :class:`dict`
+        Contains additional information about the message, if it
+        was sent by a system user.
+        This attribute is None for non-system messages.
     """
 
     client: WebSocketClient = field(repr=False)
