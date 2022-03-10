@@ -56,21 +56,28 @@ class Embed:
 
             if media := self.data.get("media"):
                 self.media = Asset(media)
+
             self.colour = self.data.get("colour")
             return
 
         # instance created by user will have empty data attribute, so construct it here
         self.data = {"type": "Text"}
+
         if title := self.title:
             self.data["title"] = title
+
         if url := self.url:
             self.data["url"] = url
+
         if description := self.description:
             self.data["description"] = description
+
         if icon_url := self.icon_url:
             self.data["icon_url"] = icon_url
+
         if media := self.media:
             self.data["media"] = media.data
+
         if colour := self.colour:
             self.data["colour"] = colour
 
