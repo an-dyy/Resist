@@ -94,7 +94,7 @@ class Message(Cacheable, Fetchable):
         self.attachments = [Asset(i) for i in self.data.get("attachments", [])]
 
         if edited := self.data.get("edited"):
-            self.edited_at = datetime.fromisoformat(edited["$date"])
+            self.edited_at = datetime.strptime(edited["$date"], "%Y-%m-%dT%H:%M:%S.%f%z")
         else:
             self.edited_at = None
 
