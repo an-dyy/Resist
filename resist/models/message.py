@@ -137,12 +137,12 @@ class Message(Cacheable, Fetchable):
         | UserActionSystemMessageContent
         | ChannelActionSystemMessageContent,
     ) -> str:
-        # in the case of system messages, the "content" field in the API respomse
-        # is a dictionary the structure of this dictionary also varies according
-        # to the type of the system message however, annotating Message.content to
-        # a Union will make using it quite painful to use needing casts and
-        # tunnecessary type narrowing. the number of system messages is negligble
-        # in comparison to normal text messages, so to avoid this union type, we
+        # In the case of system messages, the "content" field in the API respomse
+        # is a dictionary whose varies according to the type of the system message.
+        # However, annotating Message.content to a Union will make using it quite painful
+        # to use, needing casts and unnecessary type narrowing.
+        # Moreover, the number of system messages is negligble in comparison
+        # to normal text messages, so to avoid this union type, we
         # extract a pseudo "content" from the system message dictionary
         if data["type"] == "text":
             # type of data is SystemMessageContent
