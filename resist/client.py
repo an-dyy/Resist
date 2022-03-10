@@ -4,7 +4,7 @@ import asyncio
 from datetime import timedelta
 from typing import TYPE_CHECKING, Any, Callable
 
-import attr
+from attrs import define, field
 
 from .rest import RESTClient
 from .websocket import Collector, Event, Listener, WebSocketHandler
@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     Check = Callable[..., bool]
 
 
-@attr.define(slots=True)
+@define
 class WebSocketClient:
     """The class used to interact with the API.
     This is the main interface of the API wrapper.
@@ -43,11 +43,11 @@ class WebSocketClient:
         The rest client being used.
     """
 
-    token: str = attr.field(repr=False)
-    loop: asyncio.AbstractEventLoop = attr.field(kw_only=True, repr=False, default=None)
+    token: str = field(repr=False)
+    loop: asyncio.AbstractEventLoop = field(kw_only=True, repr=False, default=None)
 
-    sock: WebSocketHandler = attr.field(init=False, repr=False)
-    rest: RESTClient = attr.field(init=False, repr=False)
+    sock: WebSocketHandler = field(init=False, repr=False)
+    rest: RESTClient = field(init=False, repr=False)
 
     def on(
         self, event: Event[Any], check: Check = lambda *_: True

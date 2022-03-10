@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import Literal
 
-import attr
+from attrs import define, field
 
 from ...types import RelationData
 
 __all__ = ("Relationship",)
 
 
-@attr.s(slots=True)
+@define
 class Relationship:
     """Represents a relationship.
 
@@ -22,12 +22,12 @@ class Relationship:
         The status of your relationship.
     """
 
-    data: RelationData = attr.field(repr=False)
+    data: RelationData = field(repr=False)
 
-    unique: str = attr.field(init=False, repr=True)
+    unique: str = field(init=False, repr=True)
     status: Literal[
         "Blocked", "BlockedOther", "Friend", "Incoming", "None", "Outgoing", "User"
-    ] = attr.field(init=False, repr=True)
+    ] = field(init=False, repr=True)
 
     def __attrs_post_init__(self) -> None:
         self.unique = self.data["_id"]

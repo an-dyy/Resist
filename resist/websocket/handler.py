@@ -4,7 +4,7 @@ import logging
 from typing import TYPE_CHECKING, Any, Callable, NamedTuple, cast
 
 import aiohttp
-import attr
+from attrs import define, field
 
 from ..types import Auth
 from .events import EVENT_MAPPING
@@ -23,7 +23,7 @@ class WSMessage(NamedTuple):
     json: Callable[..., dict[Any, Any]]
 
 
-@attr.s(slots=True)
+@define
 class WebSocketHandler:
     """The class used to handle the websocket.
     This class handles things such as events.
@@ -34,11 +34,11 @@ class WebSocketHandler:
         The client being used for the connection.
     """
 
-    client: WebSocketClient = attr.field(repr=False)
-    rest: RESTClient = attr.field(init=False, repr=False)
-    sock: aiohttp.ClientWebSocketResponse = attr.field(init=False, repr=False)
+    client: WebSocketClient = field(repr=False)
+    rest: RESTClient = field(init=False, repr=False)
+    sock: aiohttp.ClientWebSocketResponse = field(init=False, repr=False)
 
-    events: dict[str, str] = attr.field(init=False, repr=False)
+    events: dict[str, str] = field(init=False, repr=False)
 
     def __attrs_post_init__(self) -> None:
         self.rest = self.client.rest
