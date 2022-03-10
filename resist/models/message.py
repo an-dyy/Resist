@@ -1,11 +1,17 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING
 
 from attrs import define, field
 
-from ..types import MasqueradeData, MessageData
+from ..types import (
+    ChannelActionSystemMessageContent,
+    MasqueradeData,
+    MessageData,
+    SystemMessageContent,
+    UserActionSystemMessageContent,
+)
 from .assets import Asset
 from .cacheable import Cacheable
 from .embed import Embed
@@ -84,13 +90,28 @@ class Message(Cacheable, Fetchable):
     )  # TODO: change this to list[Member]
     replies: list[Message] = field(init=False, repr=True)
     masquerade: MasqueradeData | None = field(init=False, repr=True)
+    system: (
+        SystemMessageContent
+        | UserActionSystemMessageContent
+        | ChannelActionSystemMessageContent
+        | None
+    ) = field(init=False, repr=True)
 
     def __attrs_post_init__(self) -> None:
         self.unique = self.data["_id"]
         self.nonce = self.data.get("nonce")
         self.channel = self.data["channel"]
         self.author = self.data["author"]
-        self.content = cast(str, self.data["content"])
+
+        content = self.data["content"]
+
+        if isinstance(content, str):
+            self.content = content
+            self.system = None
+        else:
+            self.content = self._handle_system_message_content(content)
+            self.system = content
+
         self.attachments = [Asset(i) for i in self.data.get("attachments", [])]
 
         if edited := self.data.get("edited"):
@@ -104,3 +125,25 @@ class Message(Cacheable, Fetchable):
         self.masquerade = self.data.get("masquerade")
 
         Message.cache.set(self.unique, self)
+
+    @staticmethod
+    def _handle_system_message_content(
+        data: SystemMessageContent
+        | UserActionSystemMessageContent
+        | ChannelActionSystemMessageContent,
+    ) -> str:
+        # in the case of system messages, the "content" field in the API respomse
+        # is a dictionary the structure of this dictionary also varies according
+        # to the type of the system message however, annotating Message.content to
+        # a Union will make using it quite painful to use needing casts and
+        # tunnecessary type narrowing. the number of system messages is negligble
+        # in comparison to normal text messages, so to avoid this union type, we
+        # extract a pseudo "content" from the system message dictionary
+        if data["type"] == "text":
+            # type of data is SystemMessageContent
+            return data["content"]
+        elif "id" in data:
+            # type of data is UserActionSystemMessageContent
+            return f"type:{data['type']} id:{data['id']}"
+        else:
+            return f"type:{data['type']} by:{data['by']}"

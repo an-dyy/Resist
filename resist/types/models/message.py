@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, TypedDict, Union
+from typing import Literal, TypedDict, Union, final
 
 from typing_extensions import NotRequired
 
@@ -89,11 +89,13 @@ class TextEmbedData(TypedDict):
 NoneEmbed = TypedDict("NoneEmbed", {"type": Literal["None"]})
 
 
+@final
 class SystemMessageContent(TypedDict):
     type: Literal["text"]
     content: str
 
 
+@final
 class UserActionSystemMessageContent(TypedDict):
     type: Literal[
         "user_added",
@@ -107,6 +109,7 @@ class UserActionSystemMessageContent(TypedDict):
     by: NotRequired[str]  # sent only with user_added and user_remove
 
 
+@final
 class ChannelActionSystemMessageContent(TypedDict):
     type: Literal[
         "channel_renamed", "channel_description_changed", "channel_icon_changed"
