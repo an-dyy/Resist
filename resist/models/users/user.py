@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal
 
-import attr
+from attrs import define, field
 from typing_extensions import Self
 
 from ...types import UserData
@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 __all__ = ("User",)
 
 
-@attr.s(slots=True)
+@define
 class User(Cacheable, Fetchable):
     """A class representing a User object.
 
@@ -65,25 +65,25 @@ class User(Cacheable, Fetchable):
         The relationship you have with this user.
     """
 
-    client: WebSocketClient = attr.field(repr=False)
-    data: UserData = attr.field(repr=False)
+    client: WebSocketClient = field(repr=False)
+    data: UserData = field(repr=False)
 
-    unique: str = attr.field(init=False, repr=True)
-    username: str = attr.field(init=False, repr=True)
-    avatar: None | Asset = attr.field(init=False, repr=False)
+    unique: str = field(init=False, repr=True)
+    username: str = field(init=False, repr=True)
+    avatar: None | Asset = field(init=False, repr=False)
 
-    relations: list[Relationship] = attr.field(init=False, repr=False)
-    badges: UserBadges = attr.field(init=False, repr=True)
-    presence: None | Presence = attr.field(init=False, repr=True)
+    relations: list[Relationship] = field(init=False, repr=False)
+    badges: UserBadges = field(init=False, repr=True)
+    presence: None | Presence = field(init=False, repr=True)
 
-    online: bool = attr.field(init=False, repr=True)
-    bot: bool = attr.field(init=False, repr=True)
-    owner: None | str = attr.field(init=False, repr=True)
-    flags: UserFlags = attr.field(init=False, repr=True)
+    online: bool = field(init=False, repr=True)
+    bot: bool = field(init=False, repr=True)
+    owner: None | str = field(init=False, repr=True)
+    flags: UserFlags = field(init=False, repr=True)
 
     relationship: None | Literal[
         "Blocked", "BlockedOther", "Friend", "Incoming", "None", "Outgoing", "User"
-    ] = attr.field(init=False, repr=True)
+    ] = field(init=False, repr=True)
 
     def __attrs_post_init__(self) -> None:
         self.unique = self.data["_id"]

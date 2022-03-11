@@ -5,7 +5,7 @@ import logging
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any, Callable, Generic, Literal, TypeVar
 
-import attr
+from attrs import define, field
 
 if TYPE_CHECKING:
     from ..client import WebSocketClient
@@ -50,7 +50,7 @@ NameT = TypeVar(
 EVENT_MAPPING: dict[str, Event[Any]] = {}
 
 
-@attr.s(slots=True, kw_only=True)
+@define
 class Listener:
     """A class which represents an event listener.
 
@@ -66,15 +66,15 @@ class Listener:
         The check to run before dispatching.
     """
 
-    once: bool = attr.field(repr=True)
-    callback: Callback = attr.field(repr=False)
-    check: Check = attr.field(repr=False)
+    once: bool = field(repr=True)
+    callback: Callback = field(repr=False)
+    check: Check = field(repr=False)
 
     async def __call__(self, *args: Any, **kwargs: Any) -> Any:
         return await self.callback(*args, **kwargs)
 
 
-@attr.s(slots=True, kw_only=True)
+@define
 class Collector:
     """A class which represents an event collector.
 
@@ -90,16 +90,16 @@ class Collector:
         The check to run before dispatching.
     """
 
-    once: bool = attr.field(repr=True)
-    callback: Callback = attr.field(repr=False)
-    check: Check = attr.field(repr=False)
+    once: bool = field(repr=True)
+    callback: Callback = field(repr=False)
+    check: Check = field(repr=False)
 
-    amount: int = attr.field(repr=True)
-    timeout: timedelta = attr.field(repr=True)
+    amount: int = field(repr=True)
+    timeout: timedelta = field(repr=True)
 
-    queue: asyncio.Queue[Any] = attr.field(init=False, repr=False)
-    first: datetime = attr.field(init=False, repr=True)
-    recent: datetime = attr.field(init=False, repr=True)
+    queue: asyncio.Queue[Any] = field(init=False, repr=False)
+    first: datetime = field(init=False, repr=True)
+    recent: datetime = field(init=False, repr=True)
 
     def __attrs_post_init__(self) -> None:
         self.queue = asyncio.Queue[Any](maxsize=self.amount)
@@ -124,7 +124,7 @@ class Collector:
             await self.callback(*list(zip(*items)))
 
 
-@attr.s(slots=True)
+@define
 class Event(Generic[NameT]):
     """A class which represents events.
 
@@ -143,10 +143,10 @@ class Event(Generic[NameT]):
         A list of :class:`.Collector` subscribed to the event.
     """
 
-    name: NameT = attr.field(repr=True)
+    name: NameT = field(repr=True)
 
-    listeners: list[Listener] = attr.field(init=False, repr=False)
-    collectors: list[Collector] = attr.field(init=False, repr=False)
+    listeners: list[Listener] = field(init=False, repr=False)
+    collectors: list[Collector] = field(init=False, repr=False)
 
     def __attrs_post_init__(self) -> None:
         self.listeners = []

@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import Literal
 
-import attr
+from attrs import define, field
 
 from ...types import StatusData
 
 __all__ = ("Presence",)
 
 
-@attr.s(slots=True)
+@define
 class Presence:
     """Represents presence.
 
@@ -22,10 +22,10 @@ class Presence:
         The presence of the user.
     """
 
-    data: StatusData = attr.field(repr=False)
+    data: StatusData = field(repr=False)
 
-    text: None | str = attr.field(init=False, repr=True)
-    kind: None | Literal["Busy", "Idle", "Invisible", "Online"] = attr.field(
+    text: None | str = field(init=False, repr=True)
+    kind: None | Literal["Busy", "Idle", "Invisible", "Online"] = field(
         init=False, repr=True
     )
 

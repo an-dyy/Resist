@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Generic, TypeVar
 
-import attr
+from attrs import define, field
 from typing_extensions import Self
 
 __all__ = ("Cache", "Cacheable")
@@ -11,7 +11,7 @@ KeyT = TypeVar("KeyT")
 ValueT = TypeVar("ValueT")
 
 
-@attr.s(slots=True)
+@define
 class Cache(Generic[KeyT, ValueT]):
     """A class which handles in-memory caching.
 
@@ -36,9 +36,9 @@ class Cache(Generic[KeyT, ValueT]):
         The current amount of items in the cache.
     """
 
-    root: dict[KeyT, ValueT] = attr.field(init=False, repr=False)
-    len: int = attr.field(init=False, default=0)
-    max_items: None | int = attr.field(repr=True)
+    root: dict[KeyT, ValueT] = field(init=False, repr=False)
+    len: int = field(init=False, default=0)
+    max_items: None | int = field(repr=True)
 
     def __attrs_post_init__(self) -> None:
         self.root: dict[KeyT, ValueT] = {}

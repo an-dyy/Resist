@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 import aiohttp
-import attr
+from attrs import define, field
 from typing_extensions import Self
 
 from ..types import APIContext
@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from ..client import WebSocketClient
 
 
-@attr.s(slots=True)
+@define
 class RESTClient:
     """A class which handles the REST API.
 
@@ -45,12 +45,12 @@ class RESTClient:
         The context of the API.
     """
 
-    client: WebSocketClient = attr.field(repr=False)
-    token: str = attr.field(repr=False)
-    url: str = attr.field(repr=True)
+    client: WebSocketClient = field(repr=False)
+    token: str = field(repr=False)
+    url: str = field(repr=True)
 
-    session: aiohttp.ClientSession = attr.field(init=False, repr=False)
-    context: APIContext = attr.field(init=False, repr=True)
+    session: aiohttp.ClientSession = field(init=False, repr=False)
+    context: APIContext = field(init=False, repr=True)
 
     @classmethod
     async def connect(
