@@ -3,9 +3,9 @@ from __future__ import annotations
 import resist
 
 
-class TestAvatar:
+class TestAsset:
     def test_attributes(self) -> None:
-        avatar = resist.Avatar(
+        avatar = resist.Asset(
             {  # type: ignore
                 "_id": "foo",
                 "tag": "bar",

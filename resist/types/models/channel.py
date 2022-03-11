@@ -4,35 +4,16 @@ from typing import Literal, TypedDict
 
 from typing_extensions import NotRequired
 
+from .asset import AssetData
+
+
 __all__ = (
-    "MetaData",
-    "MediaMetaData",
-    "IconData",
     "SavedMessagesData",
     "DirectMessagesData",
     "GroupData",
     "TextChannelData",
     "VoiceChannelData",
 )
-
-
-class MetaData(TypedDict):
-    type: Literal["File", "Text", "Audio"]
-
-
-class MediaMetaData(TypedDict):
-    type: Literal["Image", "Video"]
-    width: int
-    height: int
-
-
-class IconData(TypedDict):
-    _id: str
-    tag: Literal["attachments", "avatars", "backgrounds", "banners", "icons"]
-    size: int
-    filename: str
-    metadata: MetaData | MediaMetaData
-    content_type: str
 
 
 class SavedMessagesData(TypedDict):
@@ -58,7 +39,7 @@ class GroupData(TypedDict):
 
     description: NotRequired[str]
     last_message_id: NotRequired[str]
-    icon: NotRequired[IconData]
+    icon: NotRequired[AssetData]
 
     permissions: NotRequired[int]
     nsfw: NotRequired[bool]
@@ -70,7 +51,7 @@ class TextChannelData(TypedDict):
     name: str
 
     description: NotRequired[str]
-    icon: NotRequired[IconData]
+    icon: NotRequired[AssetData]
 
     default_permissions: NotRequired[int]
     role_permissions: NotRequired[int]
@@ -86,7 +67,7 @@ class VoiceChannelData(TypedDict):
     name: str
 
     description: NotRequired[str]
-    icon: NotRequired[IconData]
+    icon: NotRequired[AssetData]
 
     default_permissions: NotRequired[int]
     role_permissions: NotRequired[int]

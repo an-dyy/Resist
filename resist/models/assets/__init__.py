@@ -1,1 +1,1 @@
-from .avatar import *
+from .asset import *
